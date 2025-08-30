@@ -15,10 +15,14 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(()=>console.log('MongoDB connected'))
   .catch(err=>console.error(err));
 
+app.get('/', (req, res) => {
+  res.send(' API is running');
+});
 app.use('/api/insights', require('./routes/insights'));
+app.use('/api/auth', require('./routes/auth')); 
 //app.use('/api/companies', require('./routes/companies'));
 //app.use('/api/sectors', require('./routes/sectors')); //strech goal
-app.use('/api/auth', require('./routes/auth')); 
+
 
 app.use((err, req, res, next) => {
   console.error(err);
